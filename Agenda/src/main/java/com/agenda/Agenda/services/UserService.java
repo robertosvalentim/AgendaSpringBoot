@@ -25,10 +25,9 @@ public class UserService {
     public List<User> getAllUsers() {
         List<User> users = this.userRepository.findAll();
         if(users.isEmpty()){
-            new RuntimeException("Nenhum Usuário encontrado!"));
-        }else{
-            return users;
+            new RuntimeException("Nenhum Usuário encontrado!");
         }
+            return users;
     }
 
     @Transactional
