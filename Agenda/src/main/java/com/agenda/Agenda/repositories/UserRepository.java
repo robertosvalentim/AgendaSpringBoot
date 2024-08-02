@@ -8,5 +8,5 @@ import com.agenda.Agenda.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    User findUserById(Long id);
+    //User findUserById(Long id);
 }
