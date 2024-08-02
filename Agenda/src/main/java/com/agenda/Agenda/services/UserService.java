@@ -1,5 +1,6 @@
 package com.agenda.Agenda.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,15 @@ public class UserService {
         return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
     }
 
+    public List<User> getAllUsers() {
+        List<User> users = this.userRepository.findAll();
+        if(users.isEmpty()){
+            new RuntimeException("Nenhum Usuário encontrado!"));
+        }else{
+            return users;
+        }
+    }
+
     @Transactional
     public User createUser(User obj) {
         obj.setId(null);
@@ -31,7 +41,7 @@ public class UserService {
     @Transactional
     public User update(User obj) {
         User newObj = findUserById(obj.getId());
-        
+
         newObj.setAddress(obj.getAddress());
         newObj.setCity(obj.getCity());
         newObj.setState(obj.getState());
@@ -42,7 +52,7 @@ public class UserService {
         return this.userRepository.save(newObj);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         User obj = findUserById(id);
         try {
             this.userRepository.delete(obj);
